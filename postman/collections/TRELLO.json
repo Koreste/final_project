@@ -1,0 +1,1928 @@
+{
+	"info": {
+		"_postman_id": "6e6a7cf1-c756-4305-999a-c917f3768203",
+		"name": "TRELLO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "34657999-6e6a7cf1-c756-4305-999a-c917f3768203"
+	},
+	"item": [
+		{
+			"name": "TEST PASSANT",
+			"item": [
+				{
+					"name": "MEMBER",
+					"item": [
+						{
+							"name": "Member",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "0fe61234-cd39-49b7-ae38-83fae91301d9",
+										"exec": [
+											"pm.globals.set(\"Trello_key\", \"559a21dd17a260aae17d5bafc52ab521\");\r",
+											"pm.globals.set(\"Trello_token\",\"ATTA655c0cf4b323f3b1d3b20385707776330e81b9f77fc3ed3d5cf3ebac520398f8A76BC28F\");\r",
+											"pm.globals.set(\"BaseURL\", \"https://api.trello.com\");\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "fd5bbd84-8840-4363-a203-9c380d67013a",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "03ba3beb-dbd8-45c1-84fa-54185a848605",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/1/member/me?key={{Trello_key}}&token={{Trello_token}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"member",
+										"me"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{Trello_key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{Trello_token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "e5dbe385-527c-44ba-9e96-4c816cc4aebc",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "b3274592-ecad-44e8-b9a5-59f143081c6d",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.trello.com/1/tokens/{{Trello_token}}?key={{Trello_key}}&token={{Trello_token}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"trello",
+										"com"
+									],
+									"path": [
+										"1",
+										"tokens",
+										"{{Trello_token}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{Trello_key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{Trello_token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "9be55ff5-76a9-4ab0-a1a1-1a989cbdfe0c"
+				},
+				{
+					"name": "BOARDS",
+					"item": [
+						{
+							"name": "create boards",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "138f697d-782a-4d5c-aed5-137182bec088",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"const boardid = pm.response.json().id; \r",
+											"console.log('Setting boardid', boardid);\r",
+											"\r",
+											"pm.collectionVariables.set(\"boardid\", boardid);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "c183250a-2bdf-423b-a9a3-ab51ad383a3f",
+										"exec": [
+											"pm.collectionVariables.set(\"nameBoards\", \"Test_api\");"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "9821492f-d338-488e-9f1f-aedc57bc0d41",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/1/boards/?name={{nameBoards}}&{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										""
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "{{nameBoards}}"
+										},
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get boards",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "ab427fc7-bb80-4411-b92a-ad2356c00585",
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "0f810dc3-7355-4d3b-8cd8-ac2457f74449",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "e3cf027e-1da3-4945-8879-a826febb3e92",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/1/boards/{{boardid}}?{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{boardid}}"
+									],
+									"query": [
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update boards",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b2bf01ad-7ada-41a8-b9ad-1b19fe2dd8d5",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "6f5f7c7a-2f1c-4048-aad0-bfce749683d9",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"name\": \"Test-api-update\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/1/boards/{{boardid}}?{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{boardid}}"
+									],
+									"query": [
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "cd09c239-bb7a-4544-b22a-03cbd177b686"
+				},
+				{
+					"name": "LIST",
+					"item": [
+						{
+							"name": "create list",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "69ad392b-2123-428a-8ccf-3ebe4fb0968e",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"const listid = pm.response.json().id; \r",
+											"console.log('Setting listid', listid);\r",
+											"\r",
+											"pm.collectionVariables.set(\"listid\", listid);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "140e1b8e-ce88-4d1f-a2e0-55d773c789bc",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/1/boards/{{boardid}}/lists?name=Test_api&{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{boardid}}",
+										"lists"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "Test_api"
+										},
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get list boards",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "81d8c425-9955-4997-a638-2781ba4b2ef7",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "1741c33e-8bd6-4f0a-bd03-e02b516ec4dc",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/1/boards/{{boardid}}/lists?{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{boardid}}",
+										"lists"
+									],
+									"query": [
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update list",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "ec39d779-9874-40c4-b960-1e4d6337e25d",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "169e006a-4bb2-4bfd-8d3e-91d2fd5ed55b",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"UPDATE LIST\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/1/lists/{{listid}}?{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"lists",
+										"{{listid}}"
+									],
+									"query": [
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "23920a4f-596d-4db2-95d7-324eb8c04846"
+				},
+				{
+					"name": "CARTS",
+					"item": [
+						{
+							"name": "create card",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "ac888283-e534-4511-8ce4-a3329fe19d05",
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "f3e3aaeb-5eca-4c19-9eb6-146a4bfa1375",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"const cardsId = pm.response.json().id; \r",
+											"console.log('Setting cardsid', cardsId);\r",
+											"\r",
+											"pm.collectionVariables.set(\"cardsid\", cardsId);\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "a25e97ff-ef1f-4677-8e05-96d295214864",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"TEST API  !\",\r\n    \"pos\" : \"top\",\r\n    \"desc\" : \"TEST API DESCRIPTION SALUT 123544949449498\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/1/cards?idList={{listid}}&{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"cards"
+									],
+									"query": [
+										{
+											"key": "idList",
+											"value": "{{listid}}"
+										},
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get cards",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "7d0a5c64-612c-42c3-98bd-c326a722ec69",
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "372fb30e-1925-4aae-b12b-427995658b24",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "be71ffaa-1992-45a0-942c-6780d0b060d0",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/1/cards/{{cardsid}}?{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"cards",
+										"{{cardsid}}"
+									],
+									"query": [
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update cards",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "d0a4177f-bd9b-4995-8021-826c314b71f4",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "6da1a213-069a-4608-9923-d7979b558e28",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"desc\" : \"UPDATE DESCRIPTION \"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/1/cards/{{cardsid}}?{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"cards",
+										"{{cardsid}}"
+									],
+									"query": [
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Archive all cards",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b3774da3-9be8-414e-915d-ac631fd63be5",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "07f45ba9-81aa-4f77-8186-940e66442b62",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/1/lists/{{listid}}/archiveAllCards?{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"lists",
+										"{{listid}}",
+										"archiveAllCards"
+									],
+									"query": [
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "fa8fe6b5-a806-4163-9ecd-f2097d389b1f"
+				},
+				{
+					"name": "CHECKLIST",
+					"item": [
+						{
+							"name": "creat checklist",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c7602c7e-9736-4055-bc86-e18de1fc2835",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"const checkId = pm.response.json().id; \r",
+											"console.log('Setting checkid', checkId);\r",
+											"\r",
+											"pm.collectionVariables.set(\"checkid\", checkId);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "2a95b911-de68-4963-9887-791b827bcf19",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"test api\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/1/checklists?idCard={{cardsid}}&{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"checklists"
+									],
+									"query": [
+										{
+											"key": "idCard",
+											"value": "{{cardsid}}"
+										},
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update checklist",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "f10f74b8-2408-4f77-82b6-cfc20ae31d2d",
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "bcb03209-3889-4056-9b93-b22b0c9f017f",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "63980066-7b76-422d-90dd-5fc6dd9c526a",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"Update checklist\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/1/checklists/{{checkid}}?{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"checklists",
+										"{{checkid}}"
+									],
+									"query": [
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get checklist",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "fa034941-3189-408d-b9f9-5bac773a7c5f",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"\tpm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "71be01fb-def0-4768-8287-937ab291995f",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/1/checklists/{{checkid}}?{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"checklists",
+										"{{checkid}}"
+									],
+									"query": [
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "f3d78571-e6c1-4f92-b4ca-2da973e5b468"
+				},
+				{
+					"name": "CHECKITEM",
+					"item": [
+						{
+							"name": "creat checkitem",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "00d6005a-b81a-4de5-82c5-f02fe006f7e1",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"const checkitemId = pm.response.json().id; \r",
+											"console.log('Setting checkitemid', checkitemId);\r",
+											"\r",
+											"pm.collectionVariables.set(\"checkitemid\", checkitemId);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "ad629936-ff92-4234-b527-0369d630b23e",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/1/checklists/{{checkid}}/checkItems?name=test_api&{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"checklists",
+										"{{checkid}}",
+										"checkItems"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "test_api"
+										},
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get checkitem",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "327572f0-bf83-4a17-9348-9a44b9bacc3c",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "2eb5106b-63d4-462f-99d7-180c45968b86",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/1/checklists/{{checkid}}/checkItems/{{checkitemid}}?{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"checklists",
+										"{{checkid}}",
+										"checkItems",
+										"{{checkitemid}}"
+									],
+									"query": [
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "fe025350-7c75-4bbc-ab26-d81c6a30182b"
+				},
+				{
+					"name": "DELETE",
+					"item": [
+						{
+							"name": "delete checkitem",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "5183e5a5-59ce-477c-ba3f-4e7d284eed58",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "b36377f7-322d-47e7-b947-da361bd23730",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/1/checklists/{{checkid}}/checkItems/{{checkitemid}}?{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"checklists",
+										"{{checkid}}",
+										"checkItems",
+										"{{checkitemid}}"
+									],
+									"query": [
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete checklist",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0c7c2a0f-2a43-4720-80de-28f19990e7ac",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"\tpm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "9cfba588-520e-4f54-8e32-9fc2a255b573",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/1/checklists/{{checkid}}?{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"checklists",
+										"{{checkid}}"
+									],
+									"query": [
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete cards",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "e96d835e-cb0a-4c5c-a673-fe3dc86b9017",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "7cb33a7b-969b-465f-8565-2b165e6d2a6b",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/1/cards/{{cardsid}}?{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"cards",
+										"{{cardsid}}"
+									],
+									"query": [
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete boards",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b10a9354-85c7-4093-870d-fef7d3de4aa9",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "c755813a-9d91-435e-b95f-c38543c2cc4c",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/1/boards/{{boardid}}?{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{boardid}}"
+									],
+									"query": [
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "b29e7018-acba-49c8-bd23-73e2ed0bfdbe"
+				}
+			],
+			"id": "30039875-132b-492b-8769-08f5056cdb74"
+		},
+		{
+			"name": "TEST NON PASSANT",
+			"item": [
+				{
+					"name": "BOARDS",
+					"item": [
+						{
+							"name": "Create boards",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "8d11576e-8834-4a96-85b7-4faf5ebd997a",
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "0927434e-aa79-4474-83c8-1e023c308eb9",
+										"exec": [
+											"pm.test(\"Body matches string\", function () {\r",
+											"\tpm.expect(pm.response.text()).to.include(\"invalid value for name\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "2ab39804-2e93-4cd5-9c01-7b1d50d32720",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/1/boards/?name={{nameBoardsNF}}&{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										""
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "{{nameBoardsNF}}"
+										},
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get boards",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "6942871c-8149-413c-857c-f277249d959d",
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"\tpm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "2eef622b-e72e-4f6b-ad0f-ff3e4fc39809",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/1/boards/{{boardidNF}}?{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{boardidNF}}"
+									],
+									"query": [
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete boards",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "dbeb3eeb-4de4-4d35-977e-8d7caef79374",
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "3c1d661f-55f5-4f90-a97f-5753b9656d23",
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"\tpm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "5b7680c6-c18a-443c-b6ad-1aa563173770",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/1/boards/{{boardidNF}}?{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{boardidNF}}"
+									],
+									"query": [
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "bc8ebf02-f6d5-4f4e-af01-c91d7acb96d9"
+				},
+				{
+					"name": "LIST",
+					"item": [
+						{
+							"name": "Create list",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b6acdaae-e97a-43fe-b043-324045aa11e9",
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "bd1efdf9-9332-4bf2-84fe-0b5baf23f50d",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/1/boards/{{boardidNF}}/lists?name=Test_api&{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{boardidNF}}",
+										"lists"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "Test_api"
+										},
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get list",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a3191394-3fbd-487c-be1a-d7626d7c7662",
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "33c1bc76-4bd9-4afc-a485-6457526158f5",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/1/boards/{{boardidNF}}/lists?{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{boardidNF}}",
+										"lists"
+									],
+									"query": [
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "09b966bc-c592-4bff-9023-349e1857eb3c"
+				},
+				{
+					"name": "CARDS",
+					"item": [
+						{
+							"name": "create cards",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "5d39ec25-c8c0-40f3-a002-d9948796522f",
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"\tpm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "5243fc71-f296-40ab-b1a9-dea10a7724e7",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/1/cards?idList={{listidNF}}&{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"cards"
+									],
+									"query": [
+										{
+											"key": "idList",
+											"value": "{{listidNF}}"
+										},
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get cards",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "18b243e5-4777-42dc-ba2c-1ac0480407c8",
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"\tpm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "b4f09163-6d84-4bc4-a928-0827dd5c6210",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/1/cards/{{cardsidNF}}?{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"cards",
+										"{{cardsidNF}}"
+									],
+									"query": [
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "7527b773-d25d-4822-8b9f-e527666be5ea",
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"\tpm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "0c761213-b268-46d6-b454-68288c8248d0",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/1/cards/{{cardsidNF}}?{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"cards",
+										"{{cardsidNF}}"
+									],
+									"query": [
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "0f53e285-6d4d-4669-944e-df41a4ffb290"
+				},
+				{
+					"name": "CHECKLIST",
+					"item": [
+						{
+							"name": "create checklist",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "63f433d9-e481-436b-a5f5-f05e3aa795cb",
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {\r",
+											"\tpm.response.to.have.status(401);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "553f0e4d-ea5b-413c-9d27-e77cc6430c3b",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/1/checklists?idCard={{cardsidNF}}&{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"checklists"
+									],
+									"query": [
+										{
+											"key": "idCard",
+											"value": "{{cardsidNF}}"
+										},
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get checklist",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a9673ff2-ab73-40fa-b9ba-8663a8b5ad53",
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"\tpm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "133bdb84-89a8-4cdc-9e15-2d1b5dca8dcc",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/1/checklists/{{checkidNF}}?{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"checklists",
+										"{{checkidNF}}"
+									],
+									"query": [
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "776c4a6a-41b4-416c-a3a6-1bf1054abcb8",
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"\tpm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "8cd3cff5-aba2-48fb-9ef6-979e58fd5204",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/1/checklists/{{checkidNF}}?{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"checklists",
+										"{{checkidNF}}"
+									],
+									"query": [
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "e052f550-b7e7-43d8-9bc6-9113bd87cc64"
+				},
+				{
+					"name": "CHECKITEM",
+					"item": [
+						{
+							"name": "create checkitem",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "52b40c32-33b6-4d77-9af2-82ccef4ede62",
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"\tpm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "7ba4b939-9606-4da9-9bd0-db9053ec317c",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/1/checklists/{{checkidNF}}/checkItems?name=test_api&{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"checklists",
+										"{{checkidNF}}",
+										"checkItems"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "test_api"
+										},
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get checkitem",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "eed653a1-61ae-4a9e-9764-e25927479bbc",
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"\tpm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "a14ac528-b0ec-4dd8-975b-6c4b190fa7ee",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/1/checklists/{{checkidNF}}/checkItems/{{checkitemidNF}}?{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"checklists",
+										"{{checkidNF}}",
+										"checkItems",
+										"{{checkitemidNF}}"
+									],
+									"query": [
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete checkitem",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "77f9a65b-5ea9-40ec-a149-dd486f6613eb",
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"\tpm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "b3686a9b-0e42-4903-8485-39caec85ab36",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/1/checklists/{{checkidNF}}/checkItems/{{checkitemidNF}}?{{API-TOKEN}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"1",
+										"checklists",
+										"{{checkidNF}}",
+										"checkItems",
+										"{{checkitemidNF}}"
+									],
+									"query": [
+										{
+											"key": "{{API-TOKEN}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "771c26ef-dc0e-40c6-8bdd-2991790036e9"
+				}
+			],
+			"id": "f3252eb2-bd12-4b5f-9b92-ace5647926af"
+		}
+	],
+	"variable": [
+		{
+			"id": "95a9fb18-2a6d-4649-bfed-910ac3437e3e",
+			"key": "id",
+			"value": ""
+		},
+		{
+			"id": "34e6acac-416d-4f2a-8dfd-f7117fea6d4e",
+			"key": "boardsID",
+			"value": ""
+		},
+		{
+			"id": "dfeca435-d9c8-407a-9608-044f787e662f",
+			"key": "name",
+			"value": ""
+		},
+		{
+			"id": "b3d140d9-c88b-420f-adc1-ad492b8095b2",
+			"key": "listID",
+			"value": ""
+		},
+		{
+			"id": "ffb55d83-d431-4326-84d8-d27892d1df51",
+			"key": "cardsID",
+			"value": ""
+		},
+		{
+			"id": "b0100471-f612-4de7-b217-fa1e8be780b0",
+			"key": "cardsid",
+			"value": ""
+		},
+		{
+			"id": "2875fdb9-712b-4594-87d2-c8eefb93dc28",
+			"key": "listid",
+			"value": ""
+		},
+		{
+			"id": "0c04d02e-02a3-4869-8fec-c03e56a31660",
+			"key": "boardid",
+			"value": ""
+		},
+		{
+			"id": "beb7a423-0c66-44b2-bc6d-d8532f20ea71",
+			"key": "checkid",
+			"value": ""
+		},
+		{
+			"id": "5e4841eb-cde0-419a-a345-838b8d2a0757",
+			"key": "checkitemid",
+			"value": ""
+		},
+		{
+			"id": "b8d4be41-115d-43c9-a6d5-3c2639fe55a8",
+			"key": "nameBoards",
+			"value": ""
+		}
+	]
+}
